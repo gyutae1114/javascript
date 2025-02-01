@@ -16,8 +16,14 @@
         });
 
         $(".btn2").click(function(){
-            let name = prompt('이름')
-            console.log(`${name}님, 환영합니다.`)
+            let num = prompt('숫자')
+            if (num % 2 === 1){
+                alert('홀수');
+            } else if (num % 2 === 0){
+                alert('짝수');
+            }
+
+            
         });
     </script>
 </body>
