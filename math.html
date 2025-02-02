@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+    <H1>랜덤 숫자 맞추기!</H1>
+    <button class="start">시작!</button>
+    <input type="number" disabled value="30">
+    <button class="check" disabled>체크!</button>
+    <h3>♥<span>10</span></h3>
+    <h4>여기에 메세지가 들어와요!</h4>
+
+    <script>
+        let [num, life] = [0, 10];
+
+        // math.random은 무조건 * 숫자 개수로 생각하면 됩니다.
+        // parseInt로 정수화 
+        
+        // 준비물
+        // 시작버튼 || 재도전버튼
+        // 입력받는 input
+        // life 개수를 알려주는 무언가?
+        // 결과 메시지를 알 수 있는 무언가
+        
+        // 도전할 수 있는 기회는 10번
+        // 1. 이용자로 부터 입력받는다.
+        // 2. 랜덤을 돌려준다.
+        // 3. 1번, 2번의 숫자를 비교한다.
+        // 4. 랜덤 숫자보다 유저의 숫자가 크면 더 작은 숫자를 유도한다
+        // 5. 랜덤 숫자보다 유저의 숫자가 크면 더 큰 숫자를 유도한다.
+        // 4,5 번이 한번씩 발생할 때마다 life--
+        // 6. 숫자가 같다면 당첨
+        // 7. 재도전을 할 수 있는 버튼을 클릭한다.
+        $('button.start').click(function(){
+            console.log($(this).text());
+            num = parseInt(Math.random()*100)+1;
+            $('input').attr('disabled', false);
+            console.log(num);
+            $(this).attr('disabled', true);
+            $('button.check').attr('disabled', false);
+        });
+
+        $('button.check').click(function(){
+            let userNum = $('input').val()*1; 
+            if(userNum < num) {
+                $('h4').html('<mark>더 큰 값</mark>을 입력해 주세요');
+                life--;
+            } else if(userNum > num) {
+                $('h4').html('<mark>더 작은 값</mark>을 입력해 주세요');
+                life--;
+            } else if (userNum === num )
+            {
+                $('h4').html('<mark>정답</mark>입니다.');
+                $('.start').attr('disabled', false);
+                $('input').attr('disabled', true);
+                $('input').val(0);
+                $('button.check').attr('disabled', true);
+                $('h4').text('재시작하세요.');
+                $('.start').text('재시작');
+                life = 10;
+            }
+            
+            if(life===0) {
+                alert("기회가 끝났습니다. 게임을 더 하시려면 재시작 버튼을 클릭하세요.");
+                $('.start').attr('disabled', false);
+                $('input').attr('disabled', true);
+                $('input').val(0);
+                $('button.check').attr('disabled', true);
+                $('h4').text('재시작하세요.');
+                $('.start').text('재시작');
+                life = 10;
+
+            }
+            $('span').text(`${life}`);
+
+        });
+
+    </script>
+</body>
+</html>
