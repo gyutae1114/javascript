@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.view{
+            width: 50%;
+            height: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        div.slide{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 500px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        div.slide.active{
+            opacity: 1;
+        }
+        div.slide.s1{
+            background-color: antiquewhite;
+        }
+        div.slide.s2{
+            background-color: rebeccapurple;
+
+        }
+        div.slide.s3{
+            background-color: yellow;
+
+        }
+        div.slide.s4{
+            background-color: yellowgreen;
+
+        }
+        div.slide.s5{
+            background-color: rgb(250, 215, 227);
+        }
+        div.btns{
+            width: 100%;
+            position: absolute;
+            /*absolute에서 가운데 주는 방법은 부모요소 기준의 높이가 있고 뜯어서 붙일애 기준의 높이가 있어야 하고 마진을 auto로 주고 top 0 btoom0 :: 위아래 가운데 left0 right 0 좌우 가운데*/
+            margin: auto;
+            top: 0; bottom: 0;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button{
+            display: block;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            border: 0;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    </style>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+    <div class="view">
+        <div class="slide s1 active">1</div>
+        <div class="slide s2">2</div>
+        <div class="slide s3">3</div>
+        <div class="slide s4">4</div>
+        <div class="slide s5">5</div>
+        <div class="btns">
+            <button class="prev">◀</button>
+            <button class="next">▶</button>
+        </div>
+    </div>
+    
+    <script>
+        const btns = $('button');
+        const slides = $('.slide');
+        let idx = 0;
+
+        console.log(slides.length);
+        btns.click(function(){
+            let left = $(this).hasClass('prev');
+            if(left){
+                idx--;
+                console.log(idx);
+                slides.removeClass('active');
+                slides.eq(idx%slides.length).addClass('active');
+                console.log("왼쪽 움짐익");
+            }
+            else{
+                idx++;
+                console.log(idx);
+                slides.removeClass('active');
+                slides.eq(idx%slides.length).addClass('active');
+                console.log("오른쪽 움짐익");
+            }
+        })
+    </script>
+    
+</body>
+</html>
